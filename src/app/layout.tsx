@@ -1,4 +1,9 @@
-import "@/styles/globals.scss";
+import "./globals.css";
+import Navbar from "@/components/Navbar/Navbar";
+
+export const metadata = {
+  title: "MCP Gmail",
+};
 
 export default function RootLayout({
   children,
@@ -7,7 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

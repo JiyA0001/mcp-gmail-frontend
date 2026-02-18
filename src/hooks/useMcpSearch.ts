@@ -8,6 +8,8 @@ export function useMcpSearch() {
     const [error, setError] = useState<string | null>(null);
 
     const search = async (intent: string) => {
+        if (!intent.trim()) return;
+
         setLoading(true);
         setError(null);
 
@@ -15,7 +17,10 @@ export function useMcpSearch() {
             const result = await searchMCP(intent);
             setData(result);
         } catch (err) {
-            setError((err as Error).message);
+            const message =
+                err instanceof Error ? err.message : "Something went wrong";
+            setError(message);
+            setData(null);
         } finally {
             setLoading(false);
         }
