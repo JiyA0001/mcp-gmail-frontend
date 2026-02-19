@@ -4,6 +4,7 @@ export function useAuthStatus() {
     const [loading, setLoading] = useState(true);
     const [loggedIn, setLoggedIn] = useState(false);
     const [gmailConnected, setGmailConnected] = useState(false);
+    const [hasCredentials, setHasCredentials] = useState(false);
 
     useEffect(() => {
         async function checkStatus() {
@@ -22,6 +23,7 @@ export function useAuthStatus() {
                 const data = await res.json();
                 setLoggedIn(data.logged_in);
                 setGmailConnected(data.gmail_connected);
+                setHasCredentials(data.has_credentials);
             } catch {
                 setLoggedIn(false);
             } finally {
@@ -32,5 +34,5 @@ export function useAuthStatus() {
         checkStatus();
     }, []);
 
-    return { loading, loggedIn, gmailConnected };
+    return { loading, loggedIn, gmailConnected, hasCredentials };
 }
