@@ -40,11 +40,11 @@ export default function ConnectGmailPage() {
             if (!res.ok) throw new Error("Failed to save credentials");
 
             setStatus("success");
-            setMessage("Credentials saved! Redirecting to login...");
+            setMessage("Credentials saved! Redirecting to Google Authorization...");
 
-            // Short delay to show success state before redirecting
+            // Redirect to OAuth login to start the connection flow
             setTimeout(() => {
-                router.push("/");
+                window.location.href = `${backendUrl}/oauth/login`;
             }, 1500);
         } catch (err) {
             console.error(err);
